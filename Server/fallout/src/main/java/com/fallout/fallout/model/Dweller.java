@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fallout.fallout.exception.AlreadyMarriedException;
+import com.fallout.fallout.exception.InvalidDweller;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
@@ -76,5 +77,13 @@ public class Dweller {
         }
 
         throw new AlreadyMarriedException(this);
+    }
+
+    public void addChild(Dweller child) throws InvalidDweller{
+        if(child == null){
+            throw new InvalidDweller("given chil is invalid");
+        }
+
+        childrenIds.add(child.getId());
     }
 }
