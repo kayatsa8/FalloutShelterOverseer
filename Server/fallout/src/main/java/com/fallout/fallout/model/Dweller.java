@@ -86,4 +86,8 @@ public class Dweller {
 
         childrenIds.add(child.getId());
     }
+
+    public void assignToRoom(Room room){
+        this.room = room;
+    }
 }
