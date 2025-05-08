@@ -2,6 +2,13 @@ package com.fallout.fallout.model;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,21 +18,40 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
+@Entity
 public class Dweller {
     // private
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank(message = "first name cannot be blank")
     private String firstName;
+
+    @NotBlank(message = "last name cannot be blank")
     private String lastName;
+    
+    @NotNull(message = "gender cannot be null")
     private Gender gender;
+
+    // will be given automatically by the system
     private Integer generation;
 
     // family
+    @Min(value = -1, message = "the father's id is invalid")
     private Integer fatherId;
+
+    @Min(value = -1, message = "the mother's id is invalid")
     private Integer motherId;
+
+    @Min(value = 0, message = "the spouse's id is invalid")
     private Integer spouseId;
+
+    // will be created by the system
     private List<Integer> childrenIds;
 
     // work
+    @NotNull(message = "the room of the dweller cannot be null")
     private Room room;
     
 }
